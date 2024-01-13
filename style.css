@@ -1,0 +1,29 @@
+body{
+    background-color: antiquewhite;
+}
+
+.title{
+    font-family: "Arvo", cursive;
+    font-size: 50px;
+}
+
+
+.board{
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    background-color:azure;
+}
+
+.board div{
+    border: 5px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+.board div span{
+    display: none;
+}
