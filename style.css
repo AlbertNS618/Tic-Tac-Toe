@@ -16,14 +16,11 @@ body{
 }
 
 .board div{
+    font-family: "Arvo", cursive;
     border: 5px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: xx-large;
     font-weight: bolder;
-}
-
-.board div span{
-    display: none;
 }

@@ -1,11 +1,28 @@
 var play = 0;
-var statusGame;
+const boxBoard = document.querySelectorAll(".board div");
 var x = new Array(), y = new Array();
 
-function game(){
+for(var i = 0; i < 9 ; i++){
+    boxBoard[i].addEventListener("click", function(){
+        if(this.innerHTML == ""){
+            if(play == 0 || play % 2 == 0){
+                x.push(this.getAttribute("data-spot"));
+                this.innerHTML = "X";
+                play+=1;
+            }else{
+                y.push(this.getAttribute("data-spot"));
+                this.innerHTML = "O";
+                play+=1;
+            }
+        }
+        decision();  
+    })
+}
+
+function playGame(){
     for(var i = 0; i < 9 ; i++){
-        document.querySelectorAll(".board div")[i].addEventListener("click", function(){
-            if(!(this.innerHTML == "X" || this.innerHTML == "O")){
+        boxBoard[i].addEventListener("click", function(){
+            if(this.innerHTML == ""){
                 if(play == 0 || play % 2 == 0){
                     x.push(this.getAttribute("data-spot"));
                     this.innerHTML = "X";
@@ -16,24 +33,10 @@ function game(){
                     play+=1;
                 }
             }
-            decision();
-           
+            decision();  
         })
-        
-        try {
-            if(statusGame == "over"){
-                throw "exit";
-            }else{
-                
-            }
-            
-        } catch (error) {
-            
-        }
     }
 }
-
-game();
 
 function decision(){
     if(x.includes("1") && x.includes("2") && x.includes("3") || x.includes("1") && x.includes("3") && x.includes("7")
@@ -43,8 +46,9 @@ function decision(){
     || x.includes("3") && x.includes("5") && x.includes("7")
     ){
         document.querySelector(".game").innerHTML = "X WIN!"
-        statusGame = "over";
-        
+        for(var i = 0; i < 9 ; i++){
+            boxBoard[i].replaceWith(boxBoard[i].cloneNode(true));
+        }    
     }
     
     if(y.includes("1") && y.includes("2") && y.includes("3") || y.includes("1") && y.includes("3") && y.includes("7")
@@ -54,7 +58,9 @@ function decision(){
     || y.includes("3") && y.includes("5") && y.includes("7")
     ){
         document.querySelector(".game").innerHTML = "O WIN!"
-        statusGame = "over";
+        for(var i = 0; i < 9 ; i++){
+            boxBoard[i].replaceWith(boxBoard[i].cloneNode(true));
+        }    
     }
 }
 
@@ -66,5 +72,6 @@ document.querySelector('.refresh-button').addEventListener("click", function(){
     }
     document.querySelector(".game").innerHTML = ""
     player = 0;
+    playGame();
 });
 
