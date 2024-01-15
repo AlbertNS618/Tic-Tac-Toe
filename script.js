@@ -19,25 +19,6 @@ for(var i = 0; i < 9 ; i++){
     })
 }
 
-function playGame(){
-    for(var i = 0; i < 9 ; i++){
-        boxBoard[i].addEventListener("click", function(){
-            if(this.innerHTML == ""){
-                if(play == 0 || play % 2 == 0){
-                    x.push(this.getAttribute("data-spot"));
-                    this.innerHTML = "X";
-                    play+=1;
-                }else{
-                    y.push(this.getAttribute("data-spot"));
-                    this.innerHTML = "O";
-                    play+=1;
-                }
-            }
-            decision();  
-        })
-    }
-}
-
 function decision(){
     if(x.includes("1") && x.includes("2") && x.includes("3") || x.includes("1") && x.includes("3") && x.includes("7")
     || x.includes("4") && x.includes("5") && x.includes("6") || x.includes("2") && x.includes("5") && x.includes("8")
@@ -46,9 +27,9 @@ function decision(){
     || x.includes("3") && x.includes("5") && x.includes("7")
     ){
         document.querySelector(".game").innerHTML = "X WIN!"
-        for(var i = 0; i < 9 ; i++){
-            boxBoard[i].replaceWith(boxBoard[i].cloneNode(true));
-        }    
+        // for(var i = 0; i < 9 ; i++){
+        //     boxBoard[i].replaceWith(boxBoard[i]);
+        // }    
     }
     
     if(y.includes("1") && y.includes("2") && y.includes("3") || y.includes("1") && y.includes("3") && y.includes("7")
@@ -58,20 +39,19 @@ function decision(){
     || y.includes("3") && y.includes("5") && y.includes("7")
     ){
         document.querySelector(".game").innerHTML = "O WIN!"
-        for(var i = 0; i < 9 ; i++){
-            boxBoard[i].replaceWith(boxBoard[i].cloneNode(true));
-        }    
+        // for(var i = 0; i < 9 ; i++){
+        //     boxBoard[i].replaceWith(boxBoard[i].cloneNode(true));
+        // }    
     }
 }
 
 document.querySelector('.refresh-button').addEventListener("click", function(){
     for(var i = 0; i < 9 ; i++){
-        document.querySelectorAll(".board div")[i].innerHTML = "";   
+        boxBoard[i].innerHTML = "";
         x.pop();
         y.pop();    
     }
     document.querySelector(".game").innerHTML = ""
-    player = 0;
-    playGame();
+    play = 0;
 });
 
